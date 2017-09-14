@@ -19,3 +19,5 @@ go func() {
 p.Await()
 fmt.Printf("goroutine ran")
 ```
+
+_...and never rely on `Sleep` in test code again!_
