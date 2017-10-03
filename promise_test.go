@@ -12,7 +12,7 @@ import (
 func TestPromise(t *testing.T) {
 	Convey("IsComplete()", t, func() {
 		Convey("it should return the completion status", func() {
-			p := NewPromise()
+			p := New()
 			So(p.IsComplete(), ShouldBeFalse)
 			p.Complete(nil)
 			So(p.IsComplete(), ShouldBeTrue)
@@ -21,13 +21,13 @@ func TestPromise(t *testing.T) {
 	Convey("IsError()", t, func() {
 		Convey("it should return the error status", func() {
 			Convey("after completing without an error, IsError() returns false", func() {
-				p := NewPromise()
+				p := New()
 				So(p.IsError(), ShouldBeFalse)
 				p.Complete(nil)
 				So(p.IsError(), ShouldBeFalse)
 			})
 			Convey("after completing with an error, IsError() returns true", func() {
-				p := NewPromise()
+				p := New()
 				So(p.IsError(), ShouldBeFalse)
 				p.Complete(errors.New("ERROR"))
 				So(p.IsError(), ShouldBeTrue)
@@ -36,7 +36,7 @@ func TestPromise(t *testing.T) {
 	})
 	Convey("Complete()", t, func() {
 		Convey("it should unblock any waiting goroutines", func() {
-			p := NewPromise()
+			p := New()
 
 			numWaiters := 3
 			var wg sync.WaitGroup
@@ -56,9 +56,9 @@ func TestPromise(t *testing.T) {
 			wg.Wait()
 		})
 		Convey("it not block waiting for a waiter", func() {
-			p1 := NewPromise()
-			p2 := NewPromise()
-			done := NewPromise()
+			p1 := New()
+			p2 := New()
+			done := New()
 
 			go func() {
 				Convey("all waiting goroutines should see a nil error", t, func() {
@@ -84,14 +84,14 @@ func TestPromise(t *testing.T) {
 	})
 	Convey("AwaitUntil()", t, func() {
 		Convey("it should return with an error on timeout", func() {
-			p := NewPromise()
+			p := New()
 			err := p.AwaitUntil(time.Nanosecond)
 			So(err, ShouldNotBeNil)
 		})
 	})
 	Convey("AndThen()", t, func() {
 		Convey("it should defer the supplied closure until after completion", func() {
-			p := NewPromise()
+			p := New()
 
 			funcRan := false
 			c := make(chan struct{})
@@ -114,7 +114,7 @@ func TestPromise(t *testing.T) {
 	})
 	Convey("AndThenUntil()", t, func() {
 		Convey("it should defer the supplied closure until timeout", func() {
-			p := NewPromise()
+			p := New()
 			timeout := time.Nanosecond
 
 			var resultErr error

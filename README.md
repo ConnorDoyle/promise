@@ -10,14 +10,19 @@ Await, AwaitUntil) are idempotent and thread-safe.
 ## Minimal example
 
 ```go
-p := NewPromise()
+package main
 
-go func() {
-  p.Complete()
-}()
+import (
+	"fmt"
+	"github.com/ConnorDoyle/promise"
+)
 
-p.Await()
-fmt.Printf("goroutine ran")
+func main() {
+	p := promise.New()
+	go p.Complete(nil)
+	p.Await()
+	fmt.Println("goroutine ran")
+}
 ```
 
 _...and never rely on `Sleep` in test code again!_
