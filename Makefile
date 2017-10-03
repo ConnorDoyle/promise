@@ -6,8 +6,7 @@
 
 MKFILE_DIR := $(abspath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
-PKG_PREFIXES := pkg
-SOURCES := $(foreach p,$(PKG_PREFIXES),./$(p)/...)
+SOURCES := "."
 
 TEST_FILTER := Test
 
@@ -33,15 +32,11 @@ lint:
 	@ echo "Linting source code"
 	echo $(SOURCES) | xargs -n1 fgt golint
 
-# go test regex filtering is supported to influence the set of tests run.
-#
-# To override TEST_BUILD_TAGS use the -e option as follows:
-# TEST_FILTER=Promise make -e
 test:
 	@ echo "Running unit tests"
-	go test -v $(SOURCES) -run $(TEST_FILTER)
+	go test -v $(SOURCES)
 
 deps:
-	@ echo "Restoring source dependencies (requires `dep`)"
+	@ echo "Restoring source dependencies (requires 'dep')"
 	@ echo "  See https://github.com/golang/dep"
-	dep ensure
+	@ dep ensure
