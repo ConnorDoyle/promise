@@ -51,8 +51,8 @@ type ReadOnlyPromise interface {
 	AndThenUntil(timeout time.Duration, f func(error))
 }
 
-// NewPromise returns a new incomplete promise.
-func NewPromise() Promise {
+// New returns a new incomplete promise.
+func New() Promise {
 	return &promise{
 		complete:     false,
 		completeChan: make(chan struct{}),
@@ -132,8 +132,8 @@ type RendezVous interface {
 // NewRendezVous returns a new incomplete rendezvous.
 func NewRendezVous() RendezVous {
 	return &rendezVous{
-		a: NewPromise(),
-		b: NewPromise(),
+		a: New(),
+		b: New(),
 	}
 }
 
