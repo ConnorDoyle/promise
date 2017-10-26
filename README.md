@@ -1,5 +1,7 @@
 # promise
 
+[![GoDoc](https://godoc.org/github.com/ConnorDoyle/promise?status.svg)](https://godoc.org/github.com/ConnorDoyle/promise)
+
 Promise is a disposable write-once latch, to act as a synchronization
 barrier to signal completion of some asynchronous operation
 (successful or otherwise).
