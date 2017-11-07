@@ -1,6 +1,6 @@
 # promise
 
-[![Build Status](https://travis-ci.org/ConnorDoyle/promise.svg?branch=travis)](https://travis-ci.org/ConnorDoyle/promise)
+[![Build Status](https://travis-ci.org/ConnorDoyle/promise.svg?branch=master)](https://travis-ci.org/ConnorDoyle/promise)
 
 [![GoDoc](https://godoc.org/github.com/ConnorDoyle/promise?status.svg)](https://godoc.org/github.com/ConnorDoyle/promise)
 
